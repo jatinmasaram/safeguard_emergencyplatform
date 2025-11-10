@@ -105,3 +105,10 @@ export const userService = {
     });
   },
 };
+
+export async function getEmergencyProfileById(id: string): Promise<EmergencyProfile | null> {
+  const ref = doc(db, 'emergencyProfiles', id);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return null;
+  return snap.data() as EmergencyProfile;
+}
